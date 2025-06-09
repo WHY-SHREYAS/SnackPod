@@ -7,10 +7,15 @@ import Carousel from '../components/Carousel'
 export default function Home() {
     return (
         <>
-            <div><Navbar/></div>
-            <div><Carousel/></div>
-            <div><Card/></div>
-            <div><Footer/></div>
+            <div><Navbar /></div>
+            <div><Carousel /></div>
+            <div className='m-3'>
+                <Card/>
+                <Card/>
+                <Card/>
+                <Card/>
+            </div>
+            <div><Footer /></div>
         </>
     )
 }

@@ -3,13 +3,13 @@ import React from 'react';
 export default function Carousel() {
     return (
         <div>
-            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel">
-                <div className="carousel-inner" style={{ height: '500px' }}>
+            <div id="carouselExampleFade" className="carousel slide carousel-fade" data-bs-ride="carousel" style={{objectFit: "contain !important"}}>
+                <div className="carousel-inner" id='carousel' style={{ height: '500px' }}>
 
                     <div className="carousel-caption" style={{ zIndex: "10" }}>
-                        <form class="d-flex">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-info" type="submit">Search</button>
+                        <form className="d-flex">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-info text-white bg-info" type="submit">Search</button>
                         </form>
 
                     </div>
