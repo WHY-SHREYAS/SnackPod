@@ -1,18 +1,9 @@
-const mongoose = require("mongoose");
-
-const mongoURI = "mongodb://localhost:27017/SnackPod";
-
-const connectToMongo = async () => {
-  try {
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+const mongoose = require('mongoose');
+const mongoURI = 'mongodb+srv://Shreyas:Rasengan@10@snackpod.aioqvjd.mongodb.net/?retryWrites=true&w=majority&appName=SnackPod'
+const mongoDB = () => {
+    mongoose.connect(mongoURI, () => {
+        console.log("connected");
     });
-    console.log("Connected to MongoDB");
-  } catch (err) {
-    console.error("MongoDB connection error:", err);
-    process.exit(1);
-  }
-};
+}
 
-module.exports = connectToMongo;
+module.exports = mongoDB;
