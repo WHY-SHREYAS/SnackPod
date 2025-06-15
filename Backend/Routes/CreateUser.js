@@ -1,10 +1,10 @@
 const express = require('express')
-const router = express.router
-const User = require('..models/User')
+const router = express.Router()
+const User = require('../models/Users')
 const { body, validationResult } = require('express-validator');
 const jwt = require("jsonwebtoken")
 const jwtSecret = "m#5u%p/5u?+6Jv!F?YF8273-r:?vWu;-"
-const bcrypt = require("bcrypt.js");
+const bcrypt = require("bcryptjs");
 const { genSalt } = require('bcryptjs');
 
 
@@ -14,8 +14,6 @@ router.post("/createuser", [
     body('email').isEmail(),
     body('name').isLength({ min: 5 }),
     body('password', 'Incorrect Password').isLength({ min: 5 })],
-
-
     async (req, res) => {
 
         const errors = validationResult(req);
@@ -23,14 +21,13 @@ router.post("/createuser", [
             return res.status(400).json({ errors: errors.array() });
         }
 
-
-        const salt = await bcrypt.genSalt(10)
-        let secPassword = await bcrypt.hash(req.body.password, salt)
-
         try {
+            const salt = await bcrypt.genSalt(10)
+            let secPassword = await bcrypt.hash(req.body.password, salt)
+
             await User.create({
                 name: req.body.name,
-                password: req.body.password,
+                password: secPassword, // ✅ hashed password stored
                 email: req.body.email,
                 location: req.body.location,
             })
@@ -38,10 +35,9 @@ router.post("/createuser", [
             res.json({ success: true });
         } catch (error) {
             console.log(error)
-            res.json({ success: false });
+            res.status(500).json({ success: false, error: "Server Error" });
         }
     })
-
 
 
 router.post("/loginuser", [
